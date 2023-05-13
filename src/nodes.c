@@ -8,3 +8,9 @@ Node* newNode (int value)
 
 	return new_node;
 }
+
+void nodeDelete(Node **node)
+{
+	free(*node);
+    *node = NULL;
+}
