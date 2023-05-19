@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+//Crea un nevo nodo
 Node* newNode (int value)
 {
     new_node->value     = value;
@@ -8,7 +9,7 @@ Node* newNode (int value)
 
 	return new_node;
 }
-
+//Elimina el nodos
 void nodeDelete(Node **node)
 {
 	free(*node);
