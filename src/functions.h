@@ -10,4 +10,6 @@ struct Node {
 
 Node* newNode (int value);
 
+Node* preorder (int);
+
 #endif
