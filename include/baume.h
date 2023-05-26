@@ -1,6 +1,12 @@
 #ifndef FUNCTIONS
 #define FUNCTIONS
 
+#ifdef BUILDING
+    #define PUBLIC __attribute__((visibility ("default")))
+#else
+    #define PUBLIC
+#endif
+
 typedef struct Node Node;
 struct Node {
 	int  value;
@@ -8,9 +14,9 @@ struct Node {
     Node *left;
 };
 
-Node *nodeNew(int value);
-void nodeDelete(Node **node);
+PUBLIC Node *nodeNew(int value);
+PUBLIC void nodeDelete(Node **node);
 
-Node *preorder(int);
+PUBLIC Node *preorder(int);
 
 #endif

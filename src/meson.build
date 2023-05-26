@@ -1,6 +1,6 @@
 # Argumento usado para distingir las bibliotecas de las pruebas unitarias.
 # Solo es agregado en la biblioteca.
-lib_args = ['-DLIBRARY']
+lib_args = ['-DBUILDING']
 
 sources = files('nodes.c')
 subdir('tree')
