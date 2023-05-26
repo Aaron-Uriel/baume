@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+#include <baume.h>
+
 /* Prototipos. */
 int menu();
 

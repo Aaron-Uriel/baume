@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "functions.h"
+#include <baume.h>
 
 //Crea un nevo nodo
 Node *newNode(int value)
