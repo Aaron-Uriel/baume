@@ -11,6 +11,6 @@ struct Node {
 Node *nodeNew(int value);
 void nodeDelete(Node **node);
 
-Node *preorder(int);
+Node *preorder(int *, int);
 
 #endif
