@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <assert.h>
 
 #include <baume.h>
 
@@ -13,6 +14,9 @@ main(int argc, char *argv[])
         printf("Hola, recibí argumentos\n");
     }
 
+    /* Prueba de que funciones estén accesibles. */
+    Node *node = nodeNew(90);
+    
     
     do
     {
