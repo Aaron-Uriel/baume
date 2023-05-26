@@ -4,7 +4,7 @@
 #include <baume.h>
 
 //Crea un nevo nodo
-Node *newNode(int value)
+Node *nodeNew(int value)
 {
     Node *new_node = malloc(sizeof(*new_node));
     if (new_node == NULL) {

@@ -8,7 +8,8 @@ struct Node {
     Node *left;
 };
 
-Node *newNode(int value);
+Node *nodeNew(int value);
+void nodeDelete(Node **node);
 
 Node *preorder(int);
 
