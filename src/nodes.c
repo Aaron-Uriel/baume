@@ -7,7 +7,7 @@
 Node *nodeNew(int value)
 {
     Node *new_node = malloc(sizeof(*new_node));
-    if (new_node == NULL) {
+    if (new_node != NULL) {
         new_node->value = value;
         new_node->right = NULL;
         new_node->left  = NULL;
