@@ -1,15 +1,15 @@
 #ifndef FUNCTIONS
 #define FUNCTIONS
 
-typedef struct  Node Node;
+typedef struct Node Node;
 struct Node {
 	int  value;
-	Tree *right;
-    Tree *left;
+	Node *right;
+    Node *left;
 };
 
-Node* newNode (int value);
+Node *newNode(int value);
 
-Node* preorder (int);
+Node *preorder(int);
 
 #endif

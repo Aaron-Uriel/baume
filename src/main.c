@@ -1,5 +1,8 @@
 #include <stdio.h>
 
+/* Prototipos. */
+int menu();
+
 int
 main(int argc, char *argv[])
 {
@@ -11,7 +14,7 @@ main(int argc, char *argv[])
     
     do
     {
-        option =  menu();
+        option = menu();
 
         switch (option)
         {
