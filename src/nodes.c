@@ -6,7 +6,7 @@
 //Crea un nevo nodo
 Node *newNode(int value)
 {
-    Node *new_node = malloc(sizeof(*newNode));
+    Node *new_node = malloc(sizeof(*new_node));
     if (new_node == NULL) {
         new_node->value = value;
         new_node->right = NULL;
