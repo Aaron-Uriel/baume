@@ -18,6 +18,7 @@ PUBLIC Node *nodeNew(int value);
 PUBLIC void nodeDelete(Node **node);
 
 PUBLIC void postorder(const Node *const root);
+PUBLIC void inorder (Node *tree);
 PUBLIC Node *preorder(int);
 
 #endif
