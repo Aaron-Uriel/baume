@@ -5,6 +5,7 @@
 
 /* Prototipos. */
 int menu();
+void tree_insert_node(Node **tree, Node *node);
 
 int
 main(int argc, char *argv[])
@@ -89,4 +90,10 @@ int menu()
             "➫ ");
     scanf("%d", &option);
     return option;
+}
+
+
+void tree_insert_node(Node **tree, Node *node)
+{
+    
 }
