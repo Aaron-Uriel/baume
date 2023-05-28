@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <baume.h>
 
-void inorden (Node *tree)
+void inorder (Node *tree)
 {
     if (tree == NULL)
     {

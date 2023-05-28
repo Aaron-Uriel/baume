@@ -16,7 +16,7 @@ struct Node {
 
 PUBLIC Node *nodeNew(int value);
 PUBLIC void nodeDelete(Node **node);
-
+PUBLIC void inorder (Node *tree);
 PUBLIC Node *preorder(int);
 
 #endif
