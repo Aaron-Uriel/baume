@@ -1,1 +1,1 @@
-sources += files('traversals.c', 'tree.c')
+sources += files('inOrder.c')
