@@ -20,3 +20,18 @@ postorder(const Node *const root)
     postorder(root->right);
     visit_node(root);
 }
+
+
+
+void inorder (Node *tree)
+{
+    if (tree == NULL)
+    {
+        return; 
+    } else
+    {
+        inorder(tree->left);
+        visit_node(tree);
+        inorder(tree->right);
+    } 
+}
