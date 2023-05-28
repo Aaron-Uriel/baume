@@ -9,3 +9,14 @@
 void visit_node(const Node *const node) {
     printf("%d ", node->value);
 }
+
+void
+postorder(const Node *const root)
+{
+    if (root == NULL)
+        return;
+
+    postorder(root->left);
+    postorder(root->right);
+    visit_node(root);
+}
