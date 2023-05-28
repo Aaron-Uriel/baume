@@ -8,3 +8,4 @@ nodes = executable('node_test', 'nodes.c',
   link_with: libbaume,
   include_directories: includes)
 test('node_test', nodes)
+
