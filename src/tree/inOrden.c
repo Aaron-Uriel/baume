@@ -9,10 +9,10 @@ void inorden (Node *tree)
         return;       //Si está vacío sólo return
     } else
     {
-        inorden(tree->left);
-        printf("%d - ", tree->left);
-        inorden(tree->right);
-        printf("%d - ", tree->right);
+        inorder(tree->left);
+        printf("%d - ", tree->left->value);
+        inorder(tree->right);
+        printf("%d - ", tree->right->value);
 
     }
     
