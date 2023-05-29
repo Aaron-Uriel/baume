@@ -4,7 +4,7 @@
 int treeheigth (int a [], int n){
     int vez, treelevel;
     for (vez = 0; vez < n; vez++){
-        if (a [vez] -> a[vez + 1]){
+        if (int a [vez] -> a[vez + 1]){
             ++treelevel;
         }
         else {
