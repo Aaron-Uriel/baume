@@ -14,6 +14,8 @@ struct Node {
     Node *left;
 };
 
+PUBLIC Node *tree_search_node(const Node *const tree, const Node *const node);
+
 PUBLIC Node *nodeNew(int value);
 PUBLIC void nodeDelete(Node **node);
 
