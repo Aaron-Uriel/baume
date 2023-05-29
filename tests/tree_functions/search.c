@@ -10,7 +10,6 @@
 int32_t
 main(void) 
 {
-    /* Árbol de la figura 14.27, página 435. */
     Node *nodes[NODES_LIMIT];
     printf("Direcciones de memoria:\n");
     for (int8_t i = 0; i < NODES_LIMIT; i += 1) {
