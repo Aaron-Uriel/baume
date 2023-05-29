@@ -10,48 +10,79 @@ struct NodeAVL {
 };
 
 /*Prototipos de prueba para rotaciones*/
-void RotationLeftLeft(NodeAVL **problem, NodeAVL *next);
-
+void RotationLeftLeft(NodeAVL **problem, NodeAVL *son);
+void RotationRightRight(NodeAVL **problem, NodeAVL *son);
 
 
 /*Rotación simple izquierda izquierda*/
-void RotationLeftLeft(NodeAVL **problem, NodeAVL *next) //Nodo con fe mayor, el que le sigue
+void RotationLeftLeft(NodeAVL **problem, NodeAVL *son) //Nodo con fe mayor, su hijo
 {
-    (*problem)->left = next->right;
-    next->right = (*problem);
+    (*problem)->left = son->right;
+    son->right = (*problem);
 
     //Cambio del fe
-    if (next->fe == -1)
+    if (son->fe == -1)
     {
         (*problem)->fe = 0;
-        next->fe = 0;
+        son->fe = 0;
     } else
     {
         (*problem)->fe = -1;
-        next->fe = 1;
+        son->fe = 1;
     }
 
-    (*problem) = next;
+    (*problem) = son;
     
 }
 
 /*Rotación simple derecha derecha*/
-void RotationRightRight(NodeAVL **problem, NodeAVL *next) //Nodo con fe mayor, el que le sigue
+void RotationRightRight(NodeAVL **problem, NodeAVL *son) //Nodo con fe mayor, su hijo
 {
-    (*problem)->right = next->left;
-    next->left = (*problem);
+    (*problem)->right = son->left;
+    son->left = (*problem);
 
     //Cambio del fe
-    if (next->fe == 1)
+    if (son->fe == 1)
     {
         (*problem)->fe = 0;
-        next->fe = 0;
+        son->fe = 0;
     }else
     {
         (*problem)->fe = 1;
-        next->fe = -1;
+        son->fe = -1;
     }
 
-    (*problem) = next;
+    (*problem) = son;
      
+}
+
+/*Rotación doble izquierda derecha*/
+void RotationLeftRight(NodeAVL **problem, NodeAVL *son) //Nodo con fe mayor, su hijo
+{
+    NodeAVL *sonRight = son->right; //El hijo derecho de "son"
+    (*problem)->left = sonRight->right;
+    sonRight->right = (*problem);
+    son->right = sonRight->left;
+    sonRight->left = son;
+
+    //Cambio de fe
+    if (sonRight->fe == 1)
+    {
+        son->fe = -1;
+    }else
+    {
+        son->fe = 0;
+    }
+
+    if (sonRight->fe == -1)
+    {
+        (*problem)->fe = 1;
+    } else
+    {
+        (*problem)->fe = 0;
+    }
+
+    sonRight->fe = 0;
+    (*problem) = sonRight;
+    
 }
