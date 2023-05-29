@@ -19,4 +19,3 @@ int32_t main(void) {
 
     postorder(nodes[6]);
 }
-
