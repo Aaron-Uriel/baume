@@ -34,3 +34,24 @@ void RotationLeftLeft(NodeAVL **problem, NodeAVL *next) //Nodo con fe mayor, el 
     (*problem) = next;
     
 }
+
+/*Rotación simple derecha derecha*/
+void RotationRightRight(NodeAVL **problem, NodeAVL *next) //Nodo con fe mayor, el que le sigue
+{
+    (*problem)->right = next->left;
+    next->left = (*problem);
+
+    //Cambio del fe
+    if (next->fe == 1)
+    {
+        (*problem)->fe = 0;
+        next->fe = 0;
+    }else
+    {
+        (*problem)->fe = 1;
+        next->fe = -1;
+    }
+
+    (*problem) = next;
+     
+}
