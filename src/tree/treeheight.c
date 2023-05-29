@@ -1,9 +1,10 @@
 #include <stdio.h>
+#include <baume.h>
 
-void treeheigth (int a [], int n){
-    int vez;
+int treeheigth (int a [], int n){
+    int vez, treelevel;
     for (vez = 0; vez < n; vez++){
-        if (){
+        if (a[vez] -> a[vez + 1]){
             
         }
     }
