@@ -12,7 +12,8 @@ struct NodeAVL {
 /*Prototipos de prueba para rotaciones*/
 void RotationLeftLeft(NodeAVL **problem, NodeAVL *son);
 void RotationRightRight(NodeAVL **problem, NodeAVL *son);
-
+void RotationLeftRight(NodeAVL **problem, NodeAVL *son);
+void RotationRightLeft(NodeAVL **problem, NodeAVL *son);
 
 /*Rotación simple izquierda izquierda*/
 void RotationLeftLeft(NodeAVL **problem, NodeAVL *son) //Nodo con fe mayor, su hijo
@@ -60,6 +61,7 @@ void RotationRightRight(NodeAVL **problem, NodeAVL *son) //Nodo con fe mayor, su
 void RotationLeftRight(NodeAVL **problem, NodeAVL *son) //Nodo con fe mayor, su hijo
 {
     NodeAVL *sonRight = son->right; //El hijo derecho de "son"
+   
     (*problem)->left = sonRight->right;
     sonRight->right = (*problem);
     son->right = sonRight->left;
@@ -85,4 +87,37 @@ void RotationLeftRight(NodeAVL **problem, NodeAVL *son) //Nodo con fe mayor, su 
     sonRight->fe = 0;
     (*problem) = sonRight;
     
+}
+
+
+/*Rotación doble derecha izquierda */
+void RotationRightLeft(NodeAVL **problem, NodeAVL *son) //Nodo con fe mayor, su hijo
+{
+     NodeAVL *sonLeft = son->left; //El hijo izquierdo de "son"
+
+    (*problem)->right = sonLeft->left;
+    sonLeft->left = (*problem);
+    son->left = sonLeft->right;
+    sonLeft->right = son;
+
+    //Cambio del fe
+    if (sonLeft->fe == 1)
+    {
+        (*problem)->fe = -1;
+    }else
+    {
+        (*problem)->fe = 0;
+    }
+
+    if (sonLeft->fe == -1)
+    {
+        son->fe = 1;
+    }else
+    {
+        son->fe = 0;
+    }
+
+    sonLeft->fe = 0;
+    (*problem) = sonLeft;
+
 }
