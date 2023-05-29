@@ -6,7 +6,9 @@
 #include <baume.h>
 
 void indent(uint8_t level, uint32_t pipes_needed);
-void recursive_print(const Node *const root, uint8_t level, bool is_lower_right);
+void recursive_print(const Node *const root, uint8_t level,
+        bool is_lower_right, bool is_last);
+
 
 Node *
 tree_search_node(const Node *const tree, const Node *const node)
@@ -37,15 +39,16 @@ void
 tree_print(const Node *const tree)
 {
     printf("%d\n", tree->value);
-    recursive_print(tree->right, 1, true);
-    recursive_print(tree->left, 1, false);
+    recursive_print(tree->right, 1, true, false);
+    recursive_print(tree->left, 1, false, true);
 }
 
 /*
  * Imprime el árbol recursivamente.
  */
 void
-recursive_print(const Node *const root, uint8_t level, bool is_lower_right)
+recursive_print(const Node *const root, uint8_t level,
+        bool is_lower_right, bool is_last)
 {
     if (root == NULL) { return; }
 
@@ -62,10 +65,22 @@ recursive_print(const Node *const root, uint8_t level, bool is_lower_right)
     }
 
     indent(level, pipes_needed);
-    printf("%s %d\n", (is_lower_right)? "├──": "└──", root->value);
+    printf("%s %d\n",
+            (is_last)? "└──": "├──",
+            root->value);
 
-    recursive_print(root->right, level + 1, true);
-    recursive_print(root->left, level + 1, false);
+    bool has_lower_left = (root->left != NULL);
+    bool has_lower_right = (root->right != NULL);
+    if (has_lower_right && has_lower_left) {
+        recursive_print(root->right, level + 1, true, false);
+        recursive_print(root->left, level + 1, false, true);
+    }
+    else if (has_lower_right && !has_lower_left) {
+        recursive_print(root->right, level + 1, true, true);
+    }
+    else if (!has_lower_right && has_lower_left) {
+        recursive_print(root->left, level + 1, false, true);
+    }
 }
 
 /*
@@ -76,7 +91,6 @@ recursive_print(const Node *const root, uint8_t level, bool is_lower_right)
 void
 indent(uint8_t level, uint32_t pipes_needed)
 {
-
     for (uint8_t i = 0; i < level - 1; i += 1) {
         if (pipes_needed & (1 << i)) {
             printf("│   ");
