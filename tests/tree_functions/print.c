@@ -28,6 +28,7 @@ main(void) {
     nodes[1]->left = nodes[5];
     nodes[2]->right = nodes[3];
     nodes[2]->left = nodes[4];
+    nodes[3]->right = nodeNew(99);
     nodes[6]->right = nodes[7];
     nodes[6]->left = nodes[8];
     
