@@ -1,4 +1,5 @@
 #include <baume.h>
+#include <stdio.h>
 
 /*Estructura de prueba para rotaciones*/
 typedef struct NodeAVL NodeAVL;
@@ -120,4 +121,9 @@ void RotationRightLeft(NodeAVL **problem, NodeAVL *son) //Nodo con fe mayor, su 
     sonLeft->fe = 0;
     (*problem) = sonLeft;
 
+}
+
+int main()
+{
+  
 }
