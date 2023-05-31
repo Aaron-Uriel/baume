@@ -27,17 +27,21 @@ main(void)
     nodes[5]->left = nodes[6];
     nodes[6]->value = -3;
     nodes[7]->value = 2;
+    nodes[7]->right = nodes[8];
     nodes[8]->value = 3;
     nodes[9]->value = -8;
 
+    tree_print(nodes[0]);
+
     tree_extract_node(&nodes[0], nodeNew(1));
-    printf("%d", nodes[0]->value);
     assert(nodes[0]->value == -1);
     assert(nodes[3]->right->value == -3);
 
+    tree_print(nodes[0]);
+
     tree_extract_node(&nodes[0], nodeNew(-5));
-    printf("%d", nodes[3]->value);
     assert(nodes[3]->left == nodes[9]);
     assert(nodes[3]->right == nodes[6]);
+    tree_print(nodes[0]);
 }
 
