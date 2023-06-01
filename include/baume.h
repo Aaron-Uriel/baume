@@ -17,6 +17,6 @@ struct Node {
 PUBLIC Node *nodeNew(int value);
 PUBLIC void nodeDelete(Node **node);
 
-PUBLIC Node *preorder(int *, int);
+PUBLIC void preorder(int *, int);
 
 #endif
