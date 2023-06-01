@@ -1,1 +1,1 @@
-sources += files ('preorder.c')
+sources += files('traversals.c')

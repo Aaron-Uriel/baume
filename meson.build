@@ -2,7 +2,7 @@ project('libbaume', 'c',
   license: 'WTFPL',
   version: '0.0.1',
   default_options: ['warning_level=3', 'buildtype=debug', 'debug=true',
-    'errorlogs=true', 'prefer_static=true', 'c_args=--pedantic-errors',
+    'errorlogs=true', 'c_args=--pedantic-errors',
     'c_std=c2x'])
 
 includes = include_directories('include')
