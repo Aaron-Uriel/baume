@@ -9,7 +9,7 @@ void RotationRightRight(NodeAVL **problem, NodeAVL *son);
 void RotationLeftRight(NodeAVL **problem, NodeAVL *son);
 void RotationRightLeft(NodeAVL **problem, NodeAVL *son);
 NodeAVL *nodeNewAVL(int value);
-int height(struct node* node);
+int heightAVL(struct node* node);
 
 /*Estructura de prueba para rotaciones*/
 typedef struct NodeAVL NodeAVL;
@@ -36,14 +36,14 @@ NodeAVL *nodeNewAVL(int value)
 	return new_nodeAVL;
 }
 
-int height(struct node* node)
+int heightAVL(struct NodeAVL* node)
 {
     if(node == NULL){
         return 0;
     }
     int lefth, righth;
-    lefth = height(node -> left);
-    righth = height(node -> right);
+    lefth = heightAVL(node -> left);
+    righth = heightAVL(node -> right);
     if (lefth > right){
         return lefth + 1;
     }
@@ -51,28 +51,28 @@ int height(struct node* node)
 }
 
 
-void NodeInsertAVL(NodeAVL **tree, NodeAVL node)
+void NodeInsertAVL(NodeAVL **tree, NodeAVL *node)
 {
-    NodeAVL *son = &node;
+    NodeAVL *son = node;
 
-    if (son->value < (*tree)->value)
+    if (node->value < (*tree)->value)
     {
         NodeInsertAVL((*tree)->left, *son);
+        (*tree)->fe --;
 
             switch ((*tree)->fe)
             {
-            case 1: 
-                (*tree)->fe = 0;
+            case 0: 
                 son->height = 0; 
                 break;
                                 
-            case 0: 
-                (*tree)->fe = -1;
-                son->height = 0;
-
             case -1: 
-                son = (*tree)->left;
-                if (son->fe == -1)
+                son->height = 0;
+                break;
+
+            case -2: 
+                grandson = (*tree)->left;
+                if (grandson->fe == -1)
                 {
                     RotationLeftLeft(tree, son);
                 } else
@@ -83,7 +83,7 @@ void NodeInsertAVL(NodeAVL **tree, NodeAVL node)
                 son->height = 0;
                 break;
             }   
-        }else if (son->value >= (*tree)->value)
+        }else if (node->value >= (*tree)->value)
         {
             NodeInsertAVL((*tree)->right, son);
 
@@ -111,6 +111,12 @@ void NodeInsertAVL(NodeAVL **tree, NodeAVL node)
             }  
         }
 }
+
+
+
+
+
+
 
 /*Rotación simple izquierda izquierda*/
 void RotationLeftLeft(NodeAVL **problem, NodeAVL *son) //Nodo con fe mayor, su hijo
@@ -217,19 +223,6 @@ void RotationRightLeft(NodeAVL **problem, NodeAVL *son) //Nodo con fe mayor, su 
     sonLeft->fe = 0;
     (*problem) = sonLeft;
 
-}
-
-NodeAVL *nodeNewAVL(int value)
-{
-    NodeAVL *new_nodeAVL = malloc(sizeof(*new_nodeAVL));
-    if (new_nodeAVL != NULL) {
-        new_nodeAVL->value = value;
-        new_nodeAVL->fe = 0;
-        new_nodeAVL->right = NULL;
-        new_nodeAVL->left  = NULL;
-    }
-
-	return new_nodeAVL;
 }
 
 
