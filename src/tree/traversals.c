@@ -21,10 +21,10 @@ postorder(const Node *const root)
     visit_node(root);
 }
 
-void preorder (int a [], int n){
-    int i;
-    for (i = 0; i < n; ++i){
-        printf ("%d ", a [i]);
+void preorder (const Node *const root){
+    if (root){
+        visit_node (root);
+        preorder (root -> left);
+        preorder (root -> right);
     }
-    printf ("%d\n", a [n]);
 }
