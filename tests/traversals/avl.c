@@ -4,7 +4,12 @@
 #include <baume.h>
 
 /*Protptipos*/
+void RotationLeftLeft(NodeAVL **problem, NodeAVL *son);
+void RotationRightRight(NodeAVL **problem, NodeAVL *son);
+void RotationLeftRight(NodeAVL **problem, NodeAVL *son);
+void RotationRightLeft(NodeAVL **problem, NodeAVL *son);
 NodeAVL *nodeNewAVL(int value);
+int height(struct node* node);
 
 /*Estructura de prueba para rotaciones*/
 typedef struct NodeAVL NodeAVL;
@@ -31,6 +36,19 @@ NodeAVL *nodeNewAVL(int value)
 	return new_nodeAVL;
 }
 
+int height(struct node* node)
+{
+    if(node == NULL){
+        return 0;
+    }
+    int lefth, righth;
+    lefth = height(node -> left);
+    righth = height(node -> right);
+    if (lefth > right){
+        return lefth + 1;
+    }
+    return righth + 1;
+}
 
 
 void NodeInsertAVL(NodeAVL **tree, NodeAVL node)
@@ -41,18 +59,16 @@ void NodeInsertAVL(NodeAVL **tree, NodeAVL node)
     {
         NodeInsertAVL((*tree)->left, *son);
 
-        if ((*tree)->fe == -2)
-        {
             switch ((*tree)->fe)
             {
-            case 1:
+            case 1: 
                 (*tree)->fe = 0;
-                height = 0;
+                son->height = 0; 
                 break;
                                 
             case 0: 
-                (*tree)->fe = 0;
-                height = 0;
+                (*tree)->fe = -1;
+                son->height = 0;
 
             case -1: 
                 son = (*tree)->left;
@@ -64,32 +80,37 @@ void NodeInsertAVL(NodeAVL **tree, NodeAVL node)
                     RotationLeftRight(tree, son);
                 }
 
-                height = 0;
-                
-                
-            default:
+                son->height = 0;
                 break;
-            }
+            }   
+        }else if (son->value >= (*tree)->value)
+        {
+            NodeInsertAVL((*tree)->right, son);
+
+            switch ((*tree)->fe)
+            {
+            case 1:
+                son = (*tree)->right;
+                if (son->fe = =1)
+                {
+                    RotationRightRight(tree, son);
+                } else {
+                    RotationRightLeft(tree, son);
+                }
+                son->height = 0;
+                break;
+
+            case 0: 
+                (*tree)->fe == 1;
+                break;
+
+            case -1: 
+                son->height = 0;
+                break;
+            
+            }  
         }
-        
-        
-    }
-    
-    {
-        /* code */
-    }
-    
-    
 }
-
-
-
-/*Prototipos de prueba para rotaciones*/
-void RotationLeftLeft(NodeAVL **problem, NodeAVL *son);
-void RotationRightRight(NodeAVL **problem, NodeAVL *son);
-void RotationLeftRight(NodeAVL **problem, NodeAVL *son);
-void RotationRightLeft(NodeAVL **problem, NodeAVL *son);
-NodeAVL *nodeNewAVL(int value);
 
 /*Rotación simple izquierda izquierda*/
 void RotationLeftLeft(NodeAVL **problem, NodeAVL *son) //Nodo con fe mayor, su hijo
