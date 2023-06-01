@@ -7,6 +7,7 @@ typedef struct NodeAVL NodeAVL;
 struct NodeAVL {
 	int  value;
     int fe;
+    int height;
 	NodeAVL *right;
     NodeAVL *left;
 };
