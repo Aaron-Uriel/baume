@@ -164,3 +164,12 @@ recursive_replace(Node **const root)
     }
 }
 
+void tree_insert_node (Node **root, Node *node){
+    if (*root == NULL){
+        *root = nodeNew (node -> value);
+    } else if (node < (*root) -> node){
+        tree_insert_node (& ((*root) -> left), node);
+    } else {
+        tree_insert_node (& ((*root) -> right), node);
+    }
+}
