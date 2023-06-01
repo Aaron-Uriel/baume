@@ -22,8 +22,8 @@ PUBLIC Node *tree_extract_node(Node **const tree,
 PUBLIC Node *nodeNew(int value);
 PUBLIC void nodeDelete(Node **node);
 
-PUBLIC void postorder(const Node *const root);
 PUBLIC void inorder (Node *tree);
-PUBLIC Node *preorder(int);
+PUBLIC void postorder(const Node *const root);
+PUBLIC void preorder(const Node *const root);
 
 #endif

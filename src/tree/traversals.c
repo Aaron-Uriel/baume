@@ -21,7 +21,13 @@ postorder(const Node *const root)
     visit_node(root);
 }
 
-
+void preorder (const Node *const root){
+    if (root){
+        visit_node (root);
+        preorder (root -> left);
+        preorder (root -> right);
+    }
+}
 
 void inorder (Node *tree)
 {
@@ -34,12 +40,4 @@ void inorder (Node *tree)
         visit_node(tree);
         inorder(tree->right);
     } 
-}
-
-void preorder (int a [], int n){
-    int i;
-    for (i = 0; i < n; ++i){
-        printf ("%d ", a [i]);
-    }
-    printf ("%d\n", a [n]);
 }
