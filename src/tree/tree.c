@@ -173,3 +173,16 @@ void tree_insert_node (Node **root, Node *node){
         tree_insert_node (& ((*root) -> right), node);
     }
 }
+
+void set_notation(Node *root) {
+    if (!root){
+        return;
+    } else if (root->left){
+        set_notation(root -> left);
+    }
+    printf("(%d) ", root -> value);
+    if (root -> right){
+        set_notation(root -> right);
+    }
+    printf(")\n");
+}
