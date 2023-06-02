@@ -52,6 +52,7 @@ tree_print(const Node *const tree)
 {
     printf ("Notación de conjuntos: ");
     set_notation (tree);
+    printf ("\n");
     printf("%d\n", tree->value);
 
     bool left_exists = (tree->left != NULL);
@@ -200,6 +201,8 @@ void set_notation (const Node *const root){
         printf (",");
         set_notation (root -> right);
         printf (")");
+    } else if (((root -> right) == NULL ) && ((root -> left) == NULL)){
+        return;
     } else if ((root -> right) == NULL){
         printf ("(");
         set_notation (root -> left);
@@ -209,5 +212,4 @@ void set_notation (const Node *const root){
         set_notation (root -> right);
         printf (")");
     }
-    printf ("\n");
 }
