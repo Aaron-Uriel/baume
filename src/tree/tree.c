@@ -47,10 +47,10 @@ NodeAVL *avlInsertNode(NodeAVL **tree, NodeAVL *node)
         if (fe((*tree)) == -2)
         {
             if (son->value  < (*tree)->left->value){
-                (*tree) = RotationRight(*tree);
+                (*tree) = RotationRight(&(*tree));
             } else{
-            (*tree) -> left = RotationLeft((*tree) -> left);
-            (*tree) = RotationRight((*tree));
+            (*tree) -> left = RotationLeft(&(*tree) -> left);
+            (*tree) = RotationRight(&(*tree));
             }
         }
     }    
@@ -60,10 +60,10 @@ NodeAVL *avlInsertNode(NodeAVL **tree, NodeAVL *node)
         {
             if (son->value  >= (*tree)->right->value)
             {
-                (*tree) = RotationRight(*tree);
+                (*tree) = RotationRight(&(*tree));
             } else{
-                (*tree)->right = RotationRight((*tree)->right);
-                (*tree) = RotationLeft((*tree));
+                (*tree)->right = RotationRight(&(*tree)->right);
+                (*tree) = RotationLeft(&(*tree));
             }
             
         } 

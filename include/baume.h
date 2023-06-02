@@ -26,8 +26,8 @@ PUBLIC int fe(NodeAVL *node);
 
 PUBLIC NodeAVL  *nodeNewAVL(int value);
 PUBLIC void     avlNodeDelete(NodeAVL **node);
-PUBLIC NodeAVL *RotationLeft(NodeAVL *node);
-PUBLIC NodeAVL *RotationRight(NodeAVL *node);
+PUBLIC NodeAVL *RotationLeft(NodeAVL **node);
+PUBLIC NodeAVL *RotationRight(NodeAVL **node);
 
 
 PUBLIC void inorder (NodeAVL *tree);

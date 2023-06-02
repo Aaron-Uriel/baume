@@ -5,33 +5,33 @@
 
 
 /* Rotación izquierda. */
-NodeAVL* RotationLeft(NodeAVL* node)
+NodeAVL* RotationLeft(NodeAVL **node)
 {
-    NodeAVL* temp = node -> right;
+    NodeAVL* temp = (*node)-> right;
 
-    node -> right = temp -> left;
-    temp -> left= node;
+    (*node) -> right = temp -> left;
+    temp -> left = (*node);
 
-    node -> height = tree_height(node);
+    (*node) -> height = tree_height((*node));
     temp -> height = tree_height(temp);
 
-    node -> fe = fe(node);
+    (*node) -> fe = fe((*node));
     temp -> fe = fe(temp);
     return temp;
 }
 
 /* Rotación  derecha. */
-NodeAVL* RotationRight(NodeAVL *node) 
+NodeAVL* RotationRight(NodeAVL **node) 
 {
-    NodeAVL* temp = node -> left;
+    NodeAVL* temp = (*node) -> left;
 
-    node -> left = temp -> right;
-    temp -> right = node;
+    (*node) -> left = temp -> right;
+    temp -> right = (*node);
 
-    node -> height = tree_height(node);
+    (*node) -> height = tree_height((*node));
     temp -> height = tree_height(temp);
 
-    node -> fe = fe(node);
+    (*node) -> fe = fe((*node));
     temp -> fe = fe(temp);
     return temp;
     
