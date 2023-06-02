@@ -163,16 +163,3 @@ recursive_replace(Node **const root)
         previous_node->right = current_node->left;
     }
 }
-
-void set_notation (Node *root) {
-    if (root == NULL){
-        return;
-    } else if (root->left){
-        set_notation(root -> left);
-    }
-    printf("(%d) ", root -> value);
-    if (root -> right){
-        set_notation(root -> right);
-    }
-    printf(")\n");
-}

@@ -41,3 +41,16 @@ void inorder (Node *tree)
         inorder(tree->right);
     } 
 }
+
+void set_notation (Node *root) {
+    if (root == NULL){
+        return;
+    } else if (root->left){
+        set_notation(root -> left);
+    }
+    printf("(%d) ", root -> value);
+    if (root -> right){
+        set_notation(root -> right);
+    }
+    printf(")\n");
+}
