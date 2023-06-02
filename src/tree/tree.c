@@ -60,7 +60,7 @@ NodeAVL *avlInsertNode(NodeAVL **tree, NodeAVL *node)
         {
             if (son->value  >= (*tree)->right->value)
             {
-                (*tree) = RotationRight(&(*tree));
+                (*tree) = RotationLeft(&(*tree));
             } else{
                 (*tree)->right = RotationRight(&(*tree)->right);
                 (*tree) = RotationLeft(&(*tree));

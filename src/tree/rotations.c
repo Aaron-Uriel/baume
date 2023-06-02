@@ -24,7 +24,7 @@ NodeAVL* RotationLeft(NodeAVL **node)
 NodeAVL* RotationRight(NodeAVL **node) 
 {
     NodeAVL* temp = (*node) -> left;
-
+    
     (*node) -> left = temp -> right;
     temp -> right = (*node);
 
