@@ -121,10 +121,12 @@ recursive_print(const NodeAVL *const root, uint8_t level,
      * '|'; un bit prendido en la posición x significa que x
      * necesita '│'.
      */
-    static uint32_t pipes_needed = 0;
-    if (is_lower_right) {
+   static uint32_t pipes_needed = 0;
+    bool pipe_is_marked_at_level = pipes_needed & (1 << (level - 1));
+    if (is_lower_right && !is_last) {
         pipes_needed = pipes_needed | (1 << (level - 1));
-    } else {
+    } 
+    else if (!is_lower_right && is_last && pipe_is_marked_at_level){
         pipes_needed = pipes_needed ^ (1 << (level - 1));
     }
 
