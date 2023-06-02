@@ -190,3 +190,22 @@ recursive_replace(Node **const root)
     }
 }
 
+void set_notation (Node *root){
+    printf ("%d", root -> value);
+    if (((root -> left) != NULL ) && ((root -> left) != NULL)){
+        printf ("(");
+        set_notation (root -> left);
+        printf (",");
+        set_notation (root -> right);
+        printf (")");
+    } else if ((root -> right) == NULL){
+        printf ("(");
+        set_notation (root -> left);
+        printf (")");
+    } else if ((root -> left) == NULL){
+        printf ("(");
+        set_notation (root -> right);
+        printf (")");
+    }
+    printf ("\n");
+}
