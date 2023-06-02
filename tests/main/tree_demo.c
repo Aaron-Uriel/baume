@@ -17,18 +17,6 @@ enum MenuOptions {
 /* Prototipos. */
 enum MenuOptions menu(void);
 
-/* Función vacía por lo mientras. */
-void tree_insert_node(Node **const tree, const Node *const node) {
-    if (*tree == NULL) {
-        *tree = nodeNew(node->value);
-    }
-    else if (node->value < (*tree)->value) {
-        tree_insert_node(&(*tree)->left, node);
-    }
-    else if (node->value > (*tree)->value) {
-        tree_insert_node(&(*tree)->right, node);
-    }
-}
 uint8_t tree_height(const Node *const tree) {}
 
 bool is_int(char *str);

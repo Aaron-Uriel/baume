@@ -10,6 +10,18 @@ void recursive_print(const Node *const root, uint8_t level,
         bool is_lower_right, bool is_last);
 void recursive_replace(Node **const root);
 
+void tree_insert_node(Node **const tree, const Node *const node) {
+    if (*tree == NULL) {
+        *tree = nodeNew(node->value);
+    }
+    else if (node->value < (*tree)->value) {
+        tree_insert_node(&(*tree)->left, node);
+    }
+    else {
+        tree_insert_node(&(*tree)->right, node);
+    }
+}
+
 Node *
 tree_search_node(const Node *const tree, const Node *const node)
 {
