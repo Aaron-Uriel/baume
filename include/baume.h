@@ -7,24 +7,32 @@
     #define PUBLIC
 #endif
 
-typedef struct Node Node;
-struct Node {
-	int  value;
-	Node *right;
-    Node *left;
+typedef struct NodeAVL NodeAVL;
+struct NodeAVL {
+	int value;
+    int fe;
+    int height;
+	NodeAVL *right;
+    NodeAVL *left;
 };
 
-PUBLIC Node *tree_search_node(const Node *const tree, const Node *const node);
-PUBLIC void tree_print(const Node *const tree);
-PUBLIC Node *tree_extract_node(Node **const tree,
-        const Node *const node);
+PUBLIC void avlInsertNode(NodeAVL **tree, NodeAVL *node);
+PUBLIC NodeAVL *tree_search_node(const NodeAVL *const tree, const NodeAVL *const node);
+PUBLIC void tree_print(const NodeAVL *const tree);
+PUBLIC NodeAVL *tree_extract_node(NodeAVL **const tree,
+        const NodeAVL *const node);
+PUBLIC int tree_height(struct NodeAVL* node);
 
-PUBLIC Node *nodeNew(int value);
-PUBLIC void nodeDelete(Node **node);
-PUBLIC void inorder (Node *tree);
+PUBLIC NodeAVL  *nodeNewAVL(int value);
+PUBLIC void     avlNodeDelete(NodeAVL **node);
 
-PUBLIC void inorder (Node *tree);
-PUBLIC void postorder(const Node *const root);
-PUBLIC void preorder(const Node *const root);
+PUBLIC void RotationLeftLeft(NodeAVL **problem, NodeAVL *son);
+PUBLIC void RotationRightRight(NodeAVL **problem, NodeAVL *son);
+PUBLIC void RotationLeftRight(NodeAVL **problem, NodeAVL *son);
+PUBLIC void RotationRightLeft(NodeAVL **problem, NodeAVL *son);
+
+PUBLIC void inorder (NodeAVL *tree);
+PUBLIC void postorder(const NodeAVL *const root);
+PUBLIC void preorder(const NodeAVL *const root);
 
 #endif

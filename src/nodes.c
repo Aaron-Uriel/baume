@@ -3,20 +3,22 @@
 
 #include <baume.h>
 
-//Crea un nevo nodo
-Node *nodeNew(int value)
+/* Crea un nuevo nodo, dicho nodo incluye un factor de equilibrio. */
+NodeAVL *nodeNewAVL(int value)
 {
-    Node *new_node = malloc(sizeof(*new_node));
-    if (new_node != NULL) {
-        new_node->value = value;
-        new_node->right = NULL;
-        new_node->left  = NULL;
+    NodeAVL *new_nodeAVL = malloc(sizeof(*new_nodeAVL));
+    if (new_nodeAVL != NULL) {
+        new_nodeAVL->value = value;
+        new_nodeAVL->fe = 0;
+        new_nodeAVL->right = NULL;
+        new_nodeAVL->left  = NULL;
     }
 
-	return new_node;
+	return new_nodeAVL;
 }
+
 //Elimina el nodos
-void nodeDelete(Node **node)
+void avlNodeDelete(NodeAVL **node)
 {
 	free(*node);
     *node = NULL;

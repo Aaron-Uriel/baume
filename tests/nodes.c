@@ -5,10 +5,10 @@
 
 int
 main(void) {
-    Node *test_node = nodeNew(99);
+    NodeAVL *test_node = nodeNewAVL(99);
     assert(test_node->value == 99 && test_node->left == NULL
             && test_node->right == NULL);
 
-    nodeDelete(&test_node);
+    avlNodeDelete(&test_node);
     assert(test_node == NULL);
 }

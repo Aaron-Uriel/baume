@@ -6,12 +6,12 @@
 /* 
  * 'Visita' a un nodo dentro de algún recorrido, es decir, lo imprime.
  */
-void visit_node(const Node *const node) {
+void visit_node(const NodeAVL *const node) {
     printf("%d ", node->value);
 }
 
 void
-postorder(const Node *const root)
+postorder(const NodeAVL *const root)
 {
     if (root == NULL)
         return;
@@ -21,7 +21,7 @@ postorder(const Node *const root)
     visit_node(root);
 }
 
-void preorder (const Node *const root){
+void preorder (const NodeAVL *const root){
     if (root){
         visit_node (root);
         preorder (root -> left);
@@ -29,7 +29,7 @@ void preorder (const Node *const root){
     }
 }
 
-void inorder (Node *tree)
+void inorder (NodeAVL *tree)
 {
     if (tree == NULL)
     {

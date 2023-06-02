@@ -16,30 +16,15 @@ enum MenuOptions {
 
 /* Prototipos. */
 enum MenuOptions menu(void);
-
-/* Función vacía por lo mientras. */
-void tree_insert_node(Node **const tree, const Node *const node) {
-    if (*tree == NULL) {
-        *tree = nodeNew(node->value);
-    }
-    else if (node->value < (*tree)->value) {
-        tree_insert_node(&(*tree)->left, node);
-    }
-    else if (node->value > (*tree)->value) {
-        tree_insert_node(&(*tree)->right, node);
-    }
-}
-uint8_t tree_height(const Node *const tree) {}
-
 bool is_int(char *str);
 
 int32_t
 main(int argc, char *argv[])
 {
-    Node *tree = NULL;
+    NodeAVL *tree = NULL;
 
     if (argc > 1) {
-        Node *tmp_node = nodeNew(0);
+        NodeAVL *tmp_node = nodeNewAVL(0);
         int32_t number, i;
         for (i = 1; i < argc; i += 1) {
             if (is_int(argv[i]) != true) {
@@ -49,13 +34,13 @@ main(int argc, char *argv[])
 
             number = atoi(argv[i]);
             tmp_node->value = number;
-            tree_insert_node(&tree, tmp_node);
+            avlInsertNode(&tree, tmp_node);
         }
-        nodeDelete(&tmp_node);
+        avlNodeDelete(&tmp_node);
     }
     
-    Node *tmp_node;
-    Node dummy_node = { 0 };        /* Solo se utiliza su value para buscar. */
+    NodeAVL *tmp_node;
+    NodeAVL dummy_node = { 0 };        /* Solo se utiliza su value para buscar. */
     enum MenuOptions opt;
     do {
         opt = menu();
@@ -64,7 +49,7 @@ main(int argc, char *argv[])
         case ADD:
             printf("Ingrese el valor del nodo a insertar: ");
             scanf("%d", &dummy_node.value);
-            tree_insert_node(&tree, nodeNew(dummy_node.value));
+            avlInsertNode(&tree, nodeNewAVL(dummy_node.value));
             break;
 
         case REMOVE:
@@ -76,7 +61,7 @@ main(int argc, char *argv[])
                 printf("El nodo con valor %d no existe.\n", dummy_node.value);
             }
             else {
-                nodeDelete(&tmp_node);
+                avlNodeDelete(&tmp_node);
                 printf("Nodo con valor %d eliminado.\n", dummy_node.value);
             }
             break;

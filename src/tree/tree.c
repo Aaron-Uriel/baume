@@ -6,14 +6,94 @@
 #include <baume.h>
 
 void indent(uint8_t level, uint32_t pipes_needed);
-void recursive_print(const Node *const root, uint8_t level,
+void recursive_print(const NodeAVL *const root, uint8_t level,
         bool is_lower_right, bool is_last);
-void recursive_replace(Node **const root);
+void recursive_replace(NodeAVL **const root);
 
-Node *
-tree_search_node(const Node *const tree, const Node *const node)
+int tree_height(struct NodeAVL* node)
 {
-    const Node *found_node;
+    if(node == NULL){
+        return 0;
+    }
+
+    int left, right;
+    left = tree_height(node -> left);
+    right = tree_height(node -> right);
+    if (left > right){
+        return left + 1;
+    }
+    return right + 1;
+}
+
+void avlInsertNode(NodeAVL **tree, NodeAVL *node)
+{
+    printf("%d", node->value);
+    NodeAVL *son = node;
+    NodeAVL *grandson;
+
+    if (*tree == NULL) {
+        *tree = nodeNewAVL(node->value);
+    }
+    else if (node->value < (*tree)->value) {
+        avlInsertNode(&(*tree)->left, son);
+        (*tree)->fe --;
+
+        switch ((*tree)->fe)
+        {
+            case 0: 
+                son->height = 0; 
+                break;
+
+            case -1: 
+                son->height = 0;
+                break;
+
+            case -2: 
+                grandson = (*tree)->left;
+                if (grandson->fe == -1)
+                {
+                    RotationLeftLeft(tree, son);
+                } else
+                {
+                    RotationLeftRight(tree, son);
+                }
+
+                son->height = 0;
+                break;
+        }   
+    }
+    else if (node->value >= (*tree)->value) {
+        avlInsertNode(&(*tree)->right, son);
+
+        switch ((*tree)->fe)
+        {
+            case 1:
+                son = (*tree)->right;
+                if (son->fe == 1)
+                {
+                    RotationRightRight(tree, son);
+                } else {
+                    RotationRightLeft(tree, son);
+                }
+                son->height = 0;
+                break;
+
+            case 0: 
+                (*tree)->fe == 1;
+                break;
+
+            case -1: 
+                son->height = 0;
+                break;
+
+        }  
+    }
+}
+
+NodeAVL *
+tree_search_node(const NodeAVL *const tree, const NodeAVL *const node)
+{
+    const NodeAVL *found_node;
     if (tree == NULL) {
         found_node = NULL;
     }
@@ -27,7 +107,7 @@ tree_search_node(const Node *const tree, const Node *const node)
         found_node = tree;
     }
     
-    return (Node *)found_node;
+    return (NodeAVL *)found_node;
 }
 
 /*
@@ -36,7 +116,7 @@ tree_search_node(const Node *const tree, const Node *const node)
  * el árbol por completo.
  */
 void
-tree_print(const Node *const tree)
+tree_print(const NodeAVL *const tree)
 {
     printf("%d\n", tree->value);
     recursive_print(tree->right, 1, true, false);
@@ -47,7 +127,7 @@ tree_print(const Node *const tree)
  * Imprime el árbol recursivamente.
  */
 void
-recursive_print(const Node *const root, uint8_t level,
+recursive_print(const NodeAVL *const root, uint8_t level,
         bool is_lower_right, bool is_last)
 {
     if (root == NULL) { return; }
@@ -103,10 +183,10 @@ indent(uint8_t level, uint32_t pipes_needed)
 /* Devuelve la dirección del nodo encontrado en el árbol, en caso de no existir
  * devuelve NULL.
  */
-Node *
-tree_extract_node(Node **const tree, const Node *const node)
+NodeAVL *
+tree_extract_node(NodeAVL **const tree, const NodeAVL *const node)
 {
-    const Node *found_node;
+    const NodeAVL *found_node;
     if (*tree == NULL) {
         printf("Nodo no encontrado.\n");
         found_node = NULL;
@@ -132,7 +212,7 @@ tree_extract_node(Node **const tree, const Node *const node)
         }
     }
 
-    return (Node *)found_node;
+    return (NodeAVL *)found_node;
 }
 
 /*
@@ -142,10 +222,10 @@ tree_extract_node(Node **const tree, const Node *const node)
  * preferible que la función se use únicamente cuando hay dos hijos.
  */
 void
-recursive_replace(Node **const root)
+recursive_replace(NodeAVL **const root)
 {
-    Node *previous_node = *root;
-    Node *current_node = (*root)->left;
+    NodeAVL *previous_node = *root;
+    NodeAVL *current_node = (*root)->left;
     while(current_node->right != NULL) {
         previous_node = current_node;
         current_node = current_node->right;

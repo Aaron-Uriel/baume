@@ -6,9 +6,9 @@
 
 int32_t main(void) {
     /* Recreo el árbol de la figura 14.27, página 435. */
-    Node *nodes[NODES_LIMIT];
+    NodeAVL *nodes[NODES_LIMIT];
     for (int8_t i = 0; i < NODES_LIMIT; i += 1) {
-        nodes[i] = nodeNew(i + 1);
+        nodes[i] = nodeNewAVL(i + 1);
     }
     nodes[6]->left = nodes[2];
     nodes[6]->right = nodes[5];

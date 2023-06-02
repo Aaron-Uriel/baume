@@ -10,10 +10,10 @@
 int32_t
 main(void) 
 {
-    Node *nodes[NODES_LIMIT];
+    NodeAVL *nodes[NODES_LIMIT];
     printf("Direcciones de memoria:\n");
     for (int8_t i = 0; i < NODES_LIMIT; i += 1) {
-        nodes[i] = nodeNew(i + 1);
+        nodes[i] = nodeNewAVL(i + 1);
         printf("\tnodes[%d]: %p\n", i, (void *)nodes[i]);
     }
     nodes[0]->value = 3;
@@ -26,10 +26,10 @@ main(void)
     nodes[3]->value = 5;
     nodes[4]->value = 10;
 
-    Node *found_node = tree_search_node(nodes[0], nodes[4]);
+    NodeAVL *found_node = tree_search_node(nodes[0], nodes[4]);
     assert(found_node == nodes[4]);
 
-    found_node = tree_search_node(nodes[0], nodeNew(20));
+    found_node = tree_search_node(nodes[0], nodeNewAVL(20));
     assert(found_node == NULL);
 
     found_node = tree_search_node(nodes[1], nodes[4]);

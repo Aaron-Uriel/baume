@@ -7,10 +7,10 @@
 
 int32_t
 main(void) {
-    Node *nodes[NODES_LIMIT];
+    NodeAVL *nodes[NODES_LIMIT];
     printf("Direcciones de memoria:\n");
     for (int8_t i = 0; i < NODES_LIMIT; i += 1) {
-        nodes[i] = nodeNew(i + 1);
+        nodes[i] = nodeNewAVL(i + 1);
         printf("\tnodes[%d]: %p\n", i, (void *)nodes[i]);
     }
     nodes[0]->value = 10;
@@ -28,7 +28,7 @@ main(void) {
     nodes[1]->left = nodes[5];
     nodes[2]->right = nodes[3];
     nodes[2]->left = nodes[4];
-    nodes[3]->right = nodeNew(99);
+    nodes[3]->right = nodeNewAVL(99);
     nodes[6]->right = nodes[7];
     nodes[6]->left = nodes[8];
     

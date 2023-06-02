@@ -7,9 +7,9 @@
 int32_t
 main(void)
 {
-    Node *nodes[10];
+    NodeAVL *nodes[10];
     for (uint8_t i = 0; i < 10; i += 1) {
-        nodes[i] = nodeNew(0);
+        nodes[i] = nodeNewAVL(0);
     }
     nodes[0]->value = 1;
     nodes[0]->left = nodes[1];
@@ -33,13 +33,13 @@ main(void)
 
     tree_print(nodes[0]);
 
-    tree_extract_node(&nodes[0], nodeNew(1));
+    tree_extract_node(&nodes[0], nodeNewAVL(1));
     assert(nodes[0]->value == -1);
     assert(nodes[3]->right->value == -3);
 
     tree_print(nodes[0]);
 
-    tree_extract_node(&nodes[0], nodeNew(-5));
+    tree_extract_node(&nodes[0], nodeNewAVL(-5));
     assert(nodes[3]->left == nodes[9]);
     assert(nodes[3]->right == nodes[6]);
     tree_print(nodes[0]);

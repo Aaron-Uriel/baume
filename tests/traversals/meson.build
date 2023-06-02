@@ -12,8 +12,3 @@ postorder = executable('postorder_test', 'postorder.c',
   link_with: libbaume,
   include_directories: includes)
 test('postorder_test', postorder)
-
-rotaciones = executable('rotaciones_test', 'rotaciones.c',
-  link_with: libbaume,
-  include_directories: includes)
-test('rotaciones_test', rotaciones)
