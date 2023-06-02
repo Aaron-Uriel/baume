@@ -164,8 +164,8 @@ recursive_replace(Node **const root)
     }
 }
 
-void set_notation(Node *root) {
-    if (*root == NULL){
+void set_notation (Node *root) {
+    if (root == NULL){
         return;
     } else if (root->left){
         set_notation(root -> left);
