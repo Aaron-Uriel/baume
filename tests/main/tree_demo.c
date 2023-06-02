@@ -1,22 +1,44 @@
+#include <stdint.h>
+#include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include <assert.h>
+#include <ctype.h>
+#include <stdbool.h>
 
 #include <baume.h>
 
 /* Prototipos. */
 int menu();
 
-int
+/* Función vacía por lo mientras. */
+void tree_insert_node(Node *const *tree, const Node *const node) {
+    printf("Insertado %d", node->value);
+}
+
+bool is_int(char *str);
+
+int32_t
 main(int argc, char *argv[])
 {
-    int option;
-    if (argc > 1) {
-        printf("Hola, recibí argumentos\n");
-    }
+    Node *tree;
 
-    /* Prueba de que funciones estén accesibles. */
-    Node *node = nodeNew(90);
-    
+    if (argc > 1) {
+        Node *tmp_node;
+        int32_t number, i;
+        for (i = 1; i < argc; i += 1) {
+            if (is_int(argv[i]) != true) {
+                printf("El argumento %s no es un número.\n", argv[i]);
+                continue;
+            }
+
+            number = atoi(argv[i]);
+            tmp_node = nodeNew(number);
+            tree_insert_node(&tree, tmp_node);
+        }
+        nodeDelete(&tmp_node);
+    }
+    int option;
     
     do
     {
@@ -89,4 +111,14 @@ int menu()
             "➫ ");
     scanf("%d", &option);
     return option;
+
+bool
+is_int(char *str)
+{
+    for (uint32_t i = 0; str[i] != '\0'; i += 1) {
+        if (isdigit(str[i]) == false && str[i] != '-') {
+            return false;
+        }
+    }
+    return true;
 }
