@@ -25,69 +25,45 @@ int tree_height(struct NodeAVL* node)
     return right + 1;
 }
 
-void avlInsertNode(NodeAVL **tree, NodeAVL *node)
+NodeAVL *avlInsertNode(NodeAVL **tree, NodeAVL *node)
 {
-    printf("%d", node->value);
     NodeAVL *son = node;
-    NodeAVL *grandson;
 
-    if (*tree == NULL) {
+    if (*tree == NULL) { //--------------------------
         *tree = nodeNewAVL(node->value);
     }
-    else if (node->value < (*tree)->value) {
-        avlInsertNode(&(*tree)->left, son);
-        (*tree)->fe --;
+    else if (node->value < (*tree)->left->value) {
 
-        switch ((*tree)->fe)
+        (*tree) = avlInsertNode(&(*tree)->left, son);
+
+        if (fe((*tree)) == -2)
         {
-            case 0: 
-                son->height = 0; 
-                break;
-
-            case -1: 
-                son->height = 0;
-                break;
-
-            case -2: 
-                grandson = (*tree)->left;
-                if (grandson->fe == -1)
-                {
-                    RotationLeftLeft(tree, son);
-                } else
-                {
-                    RotationLeftRight(tree, son);
-                }
-
-                son->height = 0;
-                break;
-        }   
-    }
+            if (son->value  < (*tree)->left->value){
+                (*tree) = RotationRight(*tree);
+            } else{
+            (*tree) -> left = RotationLeft((*tree) -> left);
+            (*tree) = RotationRight((*tree));
+            }
+        }
+    }    
     else if (node->value >= (*tree)->value) {
-        avlInsertNode(&(*tree)->right, son);
-
-        switch ((*tree)->fe)
+       (*tree) = avlInsertNode(&(*tree)->right, son);
+        if (fe((*tree)) >= 2)
         {
-            case 1:
-                son = (*tree)->right;
-                if (son->fe == 1)
-                {
-                    RotationRightRight(tree, son);
-                } else {
-                    RotationRightLeft(tree, son);
-                }
-                son->height = 0;
-                break;
-
-            case 0: 
-                (*tree)->fe == 1;
-                break;
-
-            case -1: 
-                son->height = 0;
-                break;
-
-        }  
+            if (son->value  >= (*tree)->right->value)
+            {
+                (*tree) = RotationRight(*tree);
+            } else{
+                (*tree)->right = RotationRight((*tree)->right);
+                (*tree) = RotationLeft((*tree));
+            }
+            
+        } 
     }
+
+    (*tree) -> height = tree_height((*tree));
+    (*tree) -> fe = fe((*tree));
+    return (*tree);
 }
 
 NodeAVL *

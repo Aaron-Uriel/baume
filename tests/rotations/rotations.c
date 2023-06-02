@@ -6,6 +6,7 @@
 #define NODES_LIMIT 3
 int main()
 {
+    /*
   NodeAVL *nodesAvlLL[NODES_LIMIT];
     for (int i = 0; i < NODES_LIMIT; i += 1) {
         nodesAvlLL[i] = nodeNewAVL(i + 1);
@@ -55,4 +56,5 @@ int main()
           printf("%d en izquierda %d y derecha %d con fe: %d\n", nodesAvlLL[i]->value, nodesAvlLL[i]->left->value, nodesAvlLL[i]->right->value, nodesAvlLL[i]->fe);  
         }   
     }
+    */
 }
