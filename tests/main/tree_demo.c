@@ -11,24 +11,32 @@
 
 /* Globales, enumeraciones y estructuras. */
 enum MenuOptions { 
-    ADD, REMOVE, PRINT, PREORDER, INORDER, POSTORDER, SEARCH, HEIGHT, EXIT
+    ADD = 1, REMOVE, PRINT, PREORDER, INORDER, POSTORDER, SEARCH, HEIGHT, EXIT
 };
 
 /* Prototipos. */
-enum MenuOptions main_menu(void);
+enum MenuOptions menu(void);
 
 /* Función vacía por lo mientras. */
-void tree_insert_node(Node *const *tree, const Node *const node) {
-    printf("Insertado %d", node->value);
+void tree_insert_node(Node **const tree, const Node *const node) {
+    if (*tree == NULL) {
+        *tree = nodeNew(node->value);
+    }
+    else if (node->value < (*tree)->value) {
+        tree_insert_node(&(*tree)->left, node);
+    }
+    else if (node->value > (*tree)->value) {
+        tree_insert_node(&(*tree)->right, node);
+    }
 }
-uint8_t tree_height(const Node *const tree);
+uint8_t tree_height(const Node *const tree) {}
 
 bool is_int(char *str);
 
 int32_t
 main(int argc, char *argv[])
 {
-    Node *tree;
+    Node *tree = NULL;
 
     if (argc > 1) {
         Node *tmp_node = nodeNew(0);
@@ -50,7 +58,7 @@ main(int argc, char *argv[])
     Node dummy_node = { 0 };        /* Solo se utiliza su value para buscar. */
     enum MenuOptions opt;
     do {
-        opt = main_menu();
+        opt = menu();
 
         switch (opt) {
         case ADD:
@@ -110,6 +118,10 @@ main(int argc, char *argv[])
             break;    
         }
 
+        printf("Presione Enter para continuar...");
+        while (getchar() != '\n');
+        while (getchar() != '\n');
+
     } while (opt != EXIT);
 
     return 0;
@@ -117,11 +129,11 @@ main(int argc, char *argv[])
 
 
 enum MenuOptions
-menu()
+menu(void)
 {
     enum MenuOptions opt;
     uint8_t succesfull_inputs;
-    while (true) {
+    do {
         opt = 0;
 
         printf("═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬\n"
@@ -143,8 +155,9 @@ menu()
         if (opt < 1 || opt > EXIT || succesfull_inputs != 1) {
             printf("Opción inválida.\n");
             while (getchar() != '\n');
+            continue;
         }
-    }
+    } while (false);
 
     return opt;
 }
