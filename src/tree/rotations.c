@@ -3,13 +3,6 @@
 
 #include <baume.h>
 
-/* Calcular factor de equilibrio */
-int fe(NodeAVL *node)
-{
-    int lefth = tree_height(node -> left);
-    int righth = tree_height(node -> right);
-    return righth - lefth;
-}
 
 /* Rotación izquierda. */
 NodeAVL* RotationLeft(NodeAVL* node)
@@ -40,6 +33,7 @@ NodeAVL* RotationRight(NodeAVL *node)
 
     node -> fe = fe(node);
     temp -> fe = fe(temp);
+    return temp;
     
 }
 

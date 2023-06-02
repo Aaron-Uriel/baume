@@ -10,6 +10,14 @@ void recursive_print(const NodeAVL *const root, uint8_t level,
         bool is_lower_right, bool is_last);
 void recursive_replace(NodeAVL **const root);
 
+/* Calcular factor de equilibrio */
+int fe(NodeAVL *node)
+{
+    int lefth = tree_height(node -> left);
+    int righth = tree_height(node -> right);
+    return righth - lefth;
+}
+
 int tree_height(struct NodeAVL* node)
 {
     if(node == NULL){
@@ -32,9 +40,9 @@ NodeAVL *avlInsertNode(NodeAVL **tree, NodeAVL *node)
     if (*tree == NULL) { //--------------------------
         *tree = nodeNewAVL(node->value);
     }
-    else if (node->value < (*tree)->left->value) {
+    else if (node->value < (*tree)->value) {
 
-        (*tree) = avlInsertNode(&(*tree)->left, son);
+        (*tree)->left = avlInsertNode(&(*tree)->left, son);
 
         if (fe((*tree)) == -2)
         {
@@ -46,8 +54,8 @@ NodeAVL *avlInsertNode(NodeAVL **tree, NodeAVL *node)
             }
         }
     }    
-    else if (node->value >= (*tree)->value) {
-       (*tree) = avlInsertNode(&(*tree)->right, son);
+    else{
+       (*tree)->right = avlInsertNode(&(*tree)->right, son);
         if (fe((*tree)) >= 2)
         {
             if (son->value  >= (*tree)->right->value)
