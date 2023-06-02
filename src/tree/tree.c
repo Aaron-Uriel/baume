@@ -39,8 +39,20 @@ void
 tree_print(const Node *const tree)
 {
     printf("%d\n", tree->value);
-    recursive_print(tree->right, 1, true, false);
-    recursive_print(tree->left, 1, false, true);
+
+    bool left_exists = (tree->left != NULL);
+    bool right_exists = (tree->right != NULL);
+
+    if (!left_exists && right_exists) {
+        recursive_print(tree->right, 1, true, true);
+    }
+    else if (left_exists && !right_exists) {
+        recursive_print(tree->left, 1, false, true);
+    }
+    else {
+        recursive_print(tree->right, 1, true, false);
+        recursive_print(tree->left, 1, false, true);
+    }
 }
 
 /*
@@ -58,9 +70,11 @@ recursive_print(const Node *const root, uint8_t level,
      * necesita '│'.
      */
     static uint32_t pipes_needed = 0;
-    if (is_lower_right) {
+    bool pipe_is_marked_at_level = pipes_needed & (1 << (level - 1));
+    if (is_lower_right && !is_last) {
         pipes_needed = pipes_needed | (1 << (level - 1));
-    } else {
+    } 
+    else if (!is_lower_right && is_last && pipe_is_marked_at_level){
         pipes_needed = pipes_needed ^ (1 << (level - 1));
     }
 
