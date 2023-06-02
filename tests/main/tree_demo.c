@@ -8,13 +8,20 @@
 
 #include <baume.h>
 
+
+/* Globales, enumeraciones y estructuras. */
+enum MenuOptions { 
+    ADD, REMOVE, PRINT, PREORDER, INORDER, POSTORDER, SEARCH, HEIGHT, EXIT
+};
+
 /* Prototipos. */
-int menu();
+enum MenuOptions main_menu(void);
 
 /* Función vacía por lo mientras. */
 void tree_insert_node(Node *const *tree, const Node *const node) {
     printf("Insertado %d", node->value);
 }
+uint8_t tree_height(const Node *const tree);
 
 bool is_int(char *str);
 
@@ -24,7 +31,7 @@ main(int argc, char *argv[])
     Node *tree;
 
     if (argc > 1) {
-        Node *tmp_node;
+        Node *tmp_node = nodeNew(0);
         int32_t number, i;
         for (i = 1; i < argc; i += 1) {
             if (is_int(argv[i]) != true) {
@@ -33,84 +40,114 @@ main(int argc, char *argv[])
             }
 
             number = atoi(argv[i]);
-            tmp_node = nodeNew(number);
+            tmp_node->value = number;
             tree_insert_node(&tree, tmp_node);
         }
         nodeDelete(&tmp_node);
     }
-    int option;
     
-    do
-    {
-        option = menu();
+    Node *tmp_node;
+    Node dummy_node = { 0 };        /* Solo se utiliza su value para buscar. */
+    enum MenuOptions opt;
+    do {
+        opt = main_menu();
 
-        switch (option)
-        {
-        case 1:     //Agregar. (Crear + Insertar) 
-            /* code */
+        switch (opt) {
+        case ADD:
+            printf("Ingrese el valor del nodo a insertar: ");
+            scanf("%d", &dummy_node.value);
+            tree_insert_node(&tree, nodeNew(dummy_node.value));
             break;
 
-        case 2:     //Quitar. (Extraer + Eliminar) 
-            /* code */
+        case REMOVE:
+            printf("¿Qué nodo desea eliminar?: ");
+            scanf("%d", &dummy_node.value);
+
+            tmp_node = tree_extract_node(&tree, &dummy_node);
+            if (tmp_node == NULL) {
+                printf("El nodo con valor %d no existe.\n", dummy_node.value);
+            }
+            else {
+                nodeDelete(&tmp_node);
+                printf("Nodo con valor %d eliminado.\n", dummy_node.value);
+            }
             break;
 
-        case 3:     //Imprimir. 
-            /* code */
+        case PRINT:
+            tree_print(tree);
             break;
 
-        case 4:     //Enorden. 
-            /* code */
+        case PREORDER:
+            printf("Recorrido en preorden: ");
+            preorder(tree);
+            break;
+
+        case INORDER:
+            printf("Recorrido en enorden: ");
+            inorder(tree);
             break;              
-        
-        case 5:     //Preorden. 
-            /* code */
+
+        case POSTORDER:
+            printf("Recorrido en postorden: ");
+            inorder(tree);
             break;
 
-        case 6:     //Posorden. 
-            /* code */
-            break;
-
-        case 7:     //Buscar. 
-            /* code */
+        case SEARCH:
+            printf("¿Qué valor desea buscar?: ");
+            scanf("%d", &dummy_node.value);
+            tmp_node = tree_search_node(tree, &dummy_node);
+            printf("El nodo con valor %d: %s.\n",
+                    dummy_node.value,
+                    (tmp_node != NULL)? "existe": "no existe");
             break; 
 
-        case 8:     //Altura. 
-            /* code */
+        case HEIGHT:
+            printf("La altura del árbol es %d", tree_height(tree));
             break;
 
-        case 9:     //Salir
+        case EXIT:
+            exit(0);
             break;    
-        default:
-            printf("\n\t✘ Opción inválida. ✘\n\n");
-            break;
         }
 
-    } while (option != 9);
-    
+    } while (opt != EXIT);
 
     return 0;
 }
 
 
-int menu()
+enum MenuOptions
+menu()
 {
-    int option;
-    printf("═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬\n\t"
-            "x x ⁞ Menú. x x\n\t"
-            "═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬\n\t"
-            "▒┊1.- Agregar. (Crear + Insertar)\n\t"
-            "▒┊2.- Quitar. (Extraer + Eliminar)\n\t"
-            "▒┊3.- Imprimir.\n\t"
-            "▒┊4.- Enorden\n\t"
-            "▒┊5.- Preorden.\n\t"
-            "▒┊6.- Posorden.\n\t"
-            "▒┊7.- Buscar.\n\t"
-            "▒┊8.- Altura.\n\t"
-            "▒┊9.- Salir.\n\t"
-            "═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬\n\t"
-            "➫ ");
-    scanf("%d", &option);
-    return option;
+    enum MenuOptions opt;
+    uint8_t succesfull_inputs;
+    while (true) {
+        opt = 0;
+
+        printf("═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬\n"
+                "x x ⁞ Menú. x x\n"
+                "═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬\n"
+                "▒┊1.- Agregar. (Crear + Insertar)\n"
+                "▒┊2.- Quitar. (Extraer + Eliminar)\n"
+                "▒┊3.- Imprimir.\n"
+                "▒┊4.- Preorden.\n"
+                "▒┊5.- Enorden\n"
+                "▒┊6.- Postorden.\n"
+                "▒┊7.- Buscar.\n"
+                "▒┊8.- Altura.\n"
+                "▒┊9.- Salir.\n"
+                "═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬═▬\n"
+                "➫ ");
+        succesfull_inputs = scanf("%d", (int *)&opt);
+
+        if (opt < 1 || opt > EXIT || succesfull_inputs != 1) {
+            printf("Opción inválida.\n");
+            while (getchar() != '\n');
+        }
+    }
+
+    return opt;
+}
 
 bool
 is_int(char *str)
