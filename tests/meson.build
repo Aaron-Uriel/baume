@@ -1,4 +1,5 @@
 subdir('traversals')
+subdir('tree_functions')
 
 main_program = executable('tree', 'main/tree_demo.c',
   link_with: libbaume,

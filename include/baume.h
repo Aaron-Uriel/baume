@@ -14,11 +14,17 @@ struct Node {
     Node *left;
 };
 
+PUBLIC Node *tree_search_node(const Node *const tree, const Node *const node);
+PUBLIC void tree_print(const Node *const tree);
+PUBLIC Node *tree_extract_node(Node **const tree,
+        const Node *const node);
+
 PUBLIC Node *nodeNew(int value);
 PUBLIC void nodeDelete(Node **node);
 PUBLIC void inorder (Node *tree);
 
+PUBLIC void inorder (Node *tree);
 PUBLIC void postorder(const Node *const root);
-PUBLIC Node *preorder(int);
+PUBLIC void preorder(const Node *const root);
 
 #endif

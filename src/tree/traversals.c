@@ -21,7 +21,13 @@ postorder(const Node *const root)
     visit_node(root);
 }
 
-
+void preorder (const Node *const root){
+    if (root){
+        visit_node (root);
+        preorder (root -> left);
+        preorder (root -> right);
+    }
+}
 
 void inorder (Node *tree)
 {
