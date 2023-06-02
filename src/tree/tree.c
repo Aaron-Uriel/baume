@@ -50,6 +50,8 @@ tree_search_node(const Node *const tree, const Node *const node)
 void
 tree_print(const Node *const tree)
 {
+    printf ("Notación de conjuntos: ");
+    set_notation (tree);
     printf("%d\n", tree->value);
 
     bool left_exists = (tree->left != NULL);
@@ -190,9 +192,9 @@ recursive_replace(Node **const root)
     }
 }
 
-void set_notation (Node *root){
+void set_notation (const Node *const root){
     printf ("%d", root -> value);
-    if (((root -> left) != NULL ) && ((root -> left) != NULL)){
+    if (((root -> right) != NULL ) && ((root -> left) != NULL)){
         printf ("(");
         set_notation (root -> left);
         printf (",");

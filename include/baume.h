@@ -26,6 +26,6 @@ PUBLIC void nodeDelete(Node **node);
 PUBLIC void inorder (Node *tree);
 PUBLIC void postorder(const Node *const root);
 PUBLIC void preorder(const Node *const root);
-PUBLIC void set_notation (Node *root);
+PUBLIC void set_notation (const Node *const root);
 
 #endif
