@@ -177,8 +177,9 @@ tree_extract_node(NodeAVL **const tree, const NodeAVL *const node)
     }
     else if ((*tree)->value > node->value) {
         found_node = tree_extract_node(&(*tree)->left, node);
-        if (fe((*tree)) >= 2)
+        if (fe((NodeAVL *)found_node) >= 2)
         {
+            NodeAVL *son = found_node->right;
             if (son->value  >= (*tree)->right->value)
             {
                 (*tree) = RotationLeft(&(*tree));
@@ -192,6 +193,17 @@ tree_extract_node(NodeAVL **const tree, const NodeAVL *const node)
     }
     else if ((*tree)->value < node->value) {
         found_node = tree_extract_node(&(*tree)->right, node);
+        if (fe((*tree)) == -2)
+        {
+            NodeAVL *son = found_node->left;
+            if (son->value  < (*tree)->left->value){
+                (*tree) = RotationRight(&(*tree));
+            } else{
+            (*tree) -> left = RotationLeft(&(*tree) -> left);
+            (*tree) = RotationRight(&(*tree));
+            }
+        }
+
     }
     else {
         found_node = *tree;
@@ -208,7 +220,7 @@ tree_extract_node(NodeAVL **const tree, const NodeAVL *const node)
         }
     }
 
-    return (NodeAVL *)found_node;
+    return (NodeAVL *)found_node;  //Deja de ser constante al momento de regresarlo
 }
 
 /*
