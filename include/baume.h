@@ -14,6 +14,7 @@ struct Node {
     Node *left;
 };
 
+PUBLIC void tree_insert_node(Node **const tree, const Node *const node);
 PUBLIC Node *tree_search_node(const Node *const tree, const Node *const node);
 PUBLIC void tree_print(const Node *const tree);
 PUBLIC Node *tree_extract_node(Node **const tree,
