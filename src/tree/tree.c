@@ -177,9 +177,9 @@ tree_extract_node(NodeAVL **const tree, const NodeAVL *const node)
     }
     else if ((*tree)->value > node->value) {
         found_node = tree_extract_node(&(*tree)->left, node);
-        if (fe((NodeAVL *)found_node) >= 2)
+        if (fe((*tree)) >= 2)
         {
-            NodeAVL *son = found_node->right;
+            NodeAVL *son = (*tree)->right;
             if (son->value  >= (*tree)->right->value)
             {
                 (*tree) = RotationLeft(&(*tree));
@@ -195,7 +195,7 @@ tree_extract_node(NodeAVL **const tree, const NodeAVL *const node)
         found_node = tree_extract_node(&(*tree)->right, node);
         if (fe((*tree)) == -2)
         {
-            NodeAVL *son = found_node->left;
+            NodeAVL *son = (*tree)->left;
             if (son->value  < (*tree)->left->value){
                 (*tree) = RotationRight(&(*tree));
             } else{
